@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup form validation</title>
+    <style>
+        .errormessage {
+            color: red;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        h1,
+        form {
+            text-align: center;
+        }
+
+        label {
+            color: rgb(3, 3, 69);
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #firstname,
+        #username,
+        #email,
+        #password,
+        #phone,
+        #pancard {
+            border-radius: 5px;
+            padding: 5px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: orangered;
+            font-size: 18px;
+            border-radius: 10px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <form onsubmit="validation(event)" id="form">
+        <h1>Signup Form </h1>
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" name="firstname" placeholder="Firstname"><br>
+        <p id="firstnameErr" class="errormessage"></p>
+
+        <label for="username">User Name</label>
+        <input type="text" id="username" name="username" placeholder="Username"><br>
+        <p id="usernameErr" class="errormessage"></p>
+
+        <label for="email">Email Id</label>
+        <input type="email" id="email" name="email" placeholder="Email Id"><br>
+        <p id="emailErr" class="errormessage"></p>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter Password"> <br>
+        <p id="passwordErr" class="errormessage"></p>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phonenumber" placeholder="Enter Phone Number"><br>
+        <p id="phoneErr" class="errormessage"></p>
+
+        <label for="pancard">PAN Card Number</label>
+        <input type="text" id="pancard" name="pancard" placeholder="Enter PAN card Number"><br>
+        <p id="pancardErr" class="errormessage"></p>
+        <button>Submit</button>
+    </form>
+
+
+    <script>
+
+        var firstnameRegex = /^[A-Z][a-zA-Z0-9_]{4,}$/;
+        var usernameRegex = /^[a-zA-Z0-9]{5,12}$/i;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}|:<>?~-]).{8,20}$/;
+        var phoneRegex = /^[6-9]\d{9}$/;
+        var panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+        function displayErr(id, message) {
+            const errorElement = document.getElementById(id + "Err")
+            errorElement.textContent = message
+        }
+        function clearErr() {
+            const errorElements = document.querySelectorAll(".errormessage");
+            errorElements.forEach(element => {
+                element.textContent = ""
+            })
+        }
+
+        function validation(e) {
+            clearErr();
+            e.preventDefault();
+            var firstname = document.getElementById("firstname").value;
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var phone = document.getElementById("phone").value;
+            var pancard = document.getElementById("pancard").value;
+            if (firstname === "") {
+                displayErr("firstname", "Please enter Firstname")
+                return
+            }
+            if (!firstnameRegex.test(firstname)) {
+                displayErr("firstname", "First Letter must be Capital and Minimum 5 Charcters")
+                return
+            }
+            if (username === "") {
+
+                displayErr("username", "Please enter Username")
+                return
+            }
+            if (!usernameRegex.test(username)) {
+                displayErr("username", "User Name must be 5-12 Characters and Alphanumeric")
+                return
+            }
+
+            if (email === "") {
+                displayErr("email", "Please Enter Email")
+                return
+            }
+
+            if (!emailRegex.test(email)) {
+                displayErr("email", "Please Enter a Valid Email Address")
+                return
+            }
+            if (password === "") {
+                displayErr("password", "Please Enter Password")
+                return
+            }
+            if (!passwordRegex.test(password)) {
+                displayErr("password", "Password must be 8 to 20 characers and contain @#$! and Alpha Numaric")
+                return
+            }
+
+            if (phone === "") {
+                displayErr("phone", "Please Enter Phone Number")
+                return
+            }
+            if (!phoneRegex.test(phone)) {
+                displayErr("phone", "Phone number must be 10 digits and start with a digit from 6 to 9")
+                return
+            }
+            if (pancard === "") {
+                displayErr("pancard", "Please Enter Pancard Number")
+                return
+            }
+            if (!panRegex.test(pancard)) {
+                displayErr("pancard", "PAN number must be in the format: AAWNP5587R")
+                return
+            }
+            else {
+                alert("login successful")
+            }
+        }
+    </script>
+</body>
+
+</html>

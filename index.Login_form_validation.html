@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login form validation</title>
+    <link rel="stylesheet" href="Loginform.css">
+    <script src="loginform.js"></script>
+</head>
+
+</style>
+<body>
+   
+    <form onsubmit="validation(event)" id="form">
+        <h2>New User Signup</h2>
+        <input type="text" id="username" name="username" placeholder="username"><br>
+        <p id="usernameErr" class="errormessage"></p>
+
+        <input type="email" id="email" name="email" placeholder="email"><br>
+        <p id="emailErr" class="errormessage"></p>
+
+        <input type="password" id="password" name="password" placeholder="password"></i><br>
+        <p id="passwordErr" class="errormessage"></p>
+
+        <input type="tel" id="tel" name="tel" placeholder="phonenumber"><br>
+        <p id="phoneErr" class="errormessage"></p>
+
+        <button class="button">Submit</button>
+    </form>
+
+    
+</body>
+
+</html>
